@@ -477,6 +477,9 @@ function showPreview(data) {
 
     const cells = row.querySelectorAll("td:not(.num-col)");
 
+    // Check whether this PC row already contains attendance data
+    const wasAlreadyFilled = cells[0].innerText.trim() !== "";
+
     // Display the PC Number
     row.querySelector(".num-col").innerText = parsed.pcnumber;
 
@@ -488,18 +491,18 @@ function showPreview(data) {
     if (parsed.postTest) cells[4].innerText = parsed.postTest;
     if (parsed.feedback) cells[5].innerText = parsed.feedback;
 
-    const now = new Date();
-
-    cells[6].innerText = now.toLocaleDateString();
-    cells[7].innerText = now.toLocaleTimeString();
-
+    // Save the inserted or updated attendance data
     saveAttendance();
 
-    Swal.fire(
-        "Success",
-        `PC ${parsed.pcnumber} updated successfully.`,
-        "success"
-    );
+    // Close the preview and clear the temporary QR data
+    closePreview();
+
+    Swal.fire({
+        icon: "success",
+        title: wasAlreadyFilled ? "Updated" : "Successfully Inserted",
+        text: `PC ${parsed.pcnumber} attendance was ${wasAlreadyFilled ? "updated" : "inserted"} successfully.`,
+        confirmButtonText: "OK"
+    });
 }
 </script>
 
