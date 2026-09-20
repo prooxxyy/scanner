@@ -797,9 +797,16 @@ function displayAttendanceRecords(records) {
     const emptyDashboard =
         document.getElementById("emptyDashboard");
 
+
     if (!tableBody) return;
 
+
     tableBody.innerHTML = "";
+
+
+    // ==========================================
+    // NO RECORDS
+    // ==========================================
 
     if (records.length === 0) {
 
@@ -809,29 +816,71 @@ function displayAttendanceRecords(records) {
 
     }
 
+
     emptyDashboard.style.display = "none";
 
-    // Show newest attendance first
-    const reversedRecords = [...records].reverse();
+
+    // ==========================================
+    // SHOW NEWEST ATTENDANCE FIRST
+    // ==========================================
+
+    const reversedRecords =
+        [...records].reverse();
+
 
     reversedRecords.forEach((record, index) => {
 
-        const row = document.createElement("tr");
+        const row =
+            document.createElement("tr");
+
 
         row.innerHTML = `
-            <td>${records.length - index}</td>
 
             <td>
-                ${escapeHTML(record.name || "-")}
+                ${records.length - index}
             </td>
 
-            <td>
-                ${escapeHTML(record.office || "-")}
-            </td>
 
             <td>
-                ${escapeHTML(record.position || "-")}
+                ${escapeHTML(
+                    record.name || "-"
+                )}
             </td>
+
+
+            <td>
+                ${escapeHTML(
+                    record.office || "-"
+                )}
+            </td>
+
+
+            <td>
+                ${escapeHTML(
+                    record.position || "-"
+                )}
+            </td>
+
+
+            <td>
+                ${escapeHTML(
+                    record.pretest !== undefined &&
+                    record.pretest !== ""
+                        ? String(record.pretest)
+                        : "-"
+                )}
+            </td>
+
+
+            <td>
+                ${escapeHTML(
+                    record.posttest !== undefined &&
+                    record.posttest !== ""
+                        ? String(record.posttest)
+                        : "-"
+                )}
+            </td>
+
 
             <td>
                 ${escapeHTML(
@@ -839,78 +888,12 @@ function displayAttendanceRecords(records) {
                     formatDateTime(record.dateTime)
                 )}
             </td>
+
         `;
+
 
         tableBody.appendChild(row);
 
     });
+
 }
-
-
-function formatDateTime(dateTime) {
-
-    if (!dateTime) return "-";
-
-    const date = new Date(dateTime);
-
-    return date.toLocaleString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true
-    });
-}
-
-
-function escapeHTML(value) {
-
-    const div = document.createElement("div");
-
-    div.textContent = value;
-
-    return div.innerHTML;
-}
-document.addEventListener("DOMContentLoaded", function () {
-
-    loadDashboard();
-
-    const refreshButton =
-        document.getElementById("refreshDashboardButton");
-
-    const clearButton =
-        document.getElementById("clearDashboardButton");
-
-
-    if (refreshButton) {
-
-        refreshButton.addEventListener("click", function () {
-
-            loadDashboard();
-
-        });
-
-    }
-
-
-    if (clearButton) {
-
-        clearButton.addEventListener("click", function () {
-
-            const confirmClear = confirm(
-                "Are you sure you want to clear all attendance records?"
-            );
-
-            if (!confirmClear) return;
-
-            localStorage.removeItem("attendanceRecords");
-
-            loadDashboard();
-
-        });
-
-    }
-
-});
