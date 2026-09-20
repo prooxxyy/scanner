@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Scanner Hub | Choose Your Scanner</title>
+
+  <meta
+    name="description"
+    content="Choose the scanner you need for visitors, Digital Friday, Smart Classroom, or Student Mobile ICT services."
+  />
+
+  <style>
+    /* =========================================================
+       RESET
+    ========================================================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy: #0b1635;
+      --navy-light: #172653;
+      --blue: #2563eb;
+      --blue-light: #dbeafe;
+
+      --purple: #7c3aed;
+      --purple-light: #ede9fe;
+
+      --green: #059669;
+      --green-light: #d1fae5;
+
+      --orange: #ea580c;
+      --orange-light: #ffedd5;
+
+      --text: #111827;
+      --muted: #64748b;
+      --white: #ffffff;
+
+      --background: #f7f9fc;
+      --border: #e5e7eb;
+
+      --shadow-sm: 0 4px 15px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 15px 40px rgba(15, 23, 42, 0.10);
+      --shadow-lg: 0 25px 60px rgba(15, 23, 42, 0.15);
+
+      --radius: 24px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      background: var(--background);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+    }
+
+    /* =========================================================
+       BACKGROUND DECORATION
+    ========================================================= */
+    .background-decoration {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.45;
+    }
+
+    .blob-one {
+      width: 400px;
+      height: 400px;
+      background: #dbeafe;
+      top: -180px;
+      left: -100px;
+    }
+
+    .blob-two {
+      width: 350px;
+      height: 350px;
+      background: #ede9fe;
+      top: 40%;
+      right: -150px;
+    }
+
+    .blob-three {
+      width: 300px;
+      height: 300px;
+      background: #d1fae5;
+      bottom: -120px;
+      left: 30%;
+    }
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+    header {
+      width: 100%;
+      padding: 22px 5%;
+    }
+
+    .navbar {
+      max-width: 1180px;
+      margin: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--navy);
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 13px;
+
+      background: linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+      );
+
+      color: white;
+      font-size: 21px;
+
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 16px;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-text span {
+      display: block;
+      margin-top: 3px;
+
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .header-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 8px 13px;
+
+      border: 1px solid var(--border);
+      border-radius: 999px;
+
+      background: rgba(255, 255, 255, 0.7);
+
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+
+      backdrop-filter: blur(10px);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+      background: #22c55e;
+
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.12);
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+    .hero {
+      max-width: 900px;
+      margin: 60px auto 45px;
+
+      padding: 0 24px;
+
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 8px 14px;
+
+      border: 1px solid #dbeafe;
+      border-radius: 999px;
+
+      background: rgba(255, 255, 255, 0.75);
+
+      color: var(--blue);
+
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+
+      box-shadow: var(--shadow-sm);
+    }
+
+    .eyebrow-icon {
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      margin-top: 22px;
+
+      color: var(--navy);
+
+      font-size: clamp(40px, 6vw, 68px);
+      line-height: 1.03;
+      letter-spacing: -0.055em;
+      font-weight: 800;
+    }
+
+    .hero h1 .gradient-text {
+      background: linear-gradient(
+        90deg,
+        #2563eb,
+        #7c3aed,
+        #059669
+      );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-description {
+      max-width: 650px;
+      margin: 22px auto 0;
+
+      color: var(--muted);
+
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    /* =========================================================
+       SCANNER GRID
+    ========================================================= */
+    .scanner-section {
+      max-width: 1180px;
+      margin: auto;
+
+      padding: 0 24px 80px;
+    }
+
+    .scanner-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    /* =========================================================
+       SCANNER CARD
+    ========================================================= */
+    .scanner-card {
+      position: relative;
+
+      min-height: 290px;
+
+      display: flex;
+      flex-direction: column;
+
+      padding: 30px;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      background: rgba(255, 255, 255, 0.88);
+
+      box-shadow: var(--shadow-sm);
+
+      overflow: hidden;
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+    }
+
+    .scanner-card::before {
+      content: "";
+
+      position: absolute;
+      width: 180px;
+      height: 180px;
+
+      right: -75px;
+      top: -75px;
+
+      border-radius: 50%;
+
+      background: var(--card-light);
+
+      opacity: 0.8;
+
+      transition: transform 0.4s ease;
+    }
+
+    .scanner-card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow-lg);
+      border-color: transparent;
+    }
+
+    .scanner-card:hover::before {
+      transform: scale(1.35);
+    }
+
+    .scanner-card:focus-within {
+      outline: 3px solid rgba(37, 99, 235, 0.2);
+      outline-offset: 3px;
+    }
+
+    /* Card colors */
+    .card-blue {
+      --card-color: var(--blue);
+      --card-light: var(--blue-light);
+    }
+
+    .card-purple {
+      --card-color: var(--purple);
+      --card-light: var(--purple-light);
+    }
+
+    .card-green {
+      --card-color: var(--green);
+      --card-light: var(--green-light);
+    }
+
+    .card-orange {
+      --card-color: var(--orange);
+      --card-light: var(--orange-light);
+    }
+
+    .card-top {
+      position: relative;
+      z-index: 1;
+
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .scanner-icon {
+      width: 60px;
+      height: 60px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 17px;
+
+      background: var(--card-light);
+      color: var(--card-color);
+
+      font-size: 27px;
+
+      transition: transform 0.3s ease;
+    }
+
+    .scanner-card:hover .scanner-icon {
+      transform: rotate(-4deg) scale(1.08);
+    }
+
+    .card-number {
+      color: #cbd5e1;
+
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .scanner-card h2 {
+      position: relative;
+      z-index: 1;
+
+      margin-top: 27px;
+
+      color: var(--navy);
+
+      font-size: 23px;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+    }
+
+    .scanner-card p {
+      position: relative;
+      z-index: 1;
+
+      max-width: 480px;
+
+      margin-top: 11px;
+
+      color: var(--muted);
+
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .card-action {
+      position: relative;
+      z-index: 1;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-top: auto;
+      padding-top: 25px;
+    }
+
+    .open-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      padding: 11px 17px;
+
+      border-radius: 12px;
+
+      background: var(--card-light);
+      color: var(--card-color);
+
+      font-size: 13px;
+      font-weight: 750;
+
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .open-button:hover {
+      background: var(--card-color);
+      color: white;
+      transform: translateX(3px);
+    }
+
+    .arrow {
+      font-size: 17px;
+      transition: transform 0.2s ease;
+    }
+
+    .open-button:hover .arrow {
+      transform: translateX(3px);
+    }
+
+    .card-label {
+      color: #94a3b8;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* =========================================================
+       INFO BAR
+    ========================================================= */
+    .info-bar {
+      max-width: 1180px;
+      margin: 0 auto 70px;
+      padding: 0 24px;
+    }
+
+    .info-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      padding: 17px 22px;
+
+      border: 1px solid var(--border);
+      border-radius: 16px;
+
+      background: rgba(255, 255, 255, 0.7);
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      text-align: center;
+    }
+
+    .info-inner strong {
+      color: var(--navy);
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+    footer {
+      border-top: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.65);
+    }
+
+    .footer-inner {
+      max-width: 1180px;
+      margin: auto;
+
+      padding: 28px 24px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-copy {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+    }
+
+    .footer-links button {
+      background: none;
+      color: var(--muted);
+
+      font-size: 12px;
+      font-weight: 600;
+
+      transition: color 0.2s ease;
+    }
+
+    .footer-links button:hover {
+      color: var(--blue);
+    }
+
+    /* =========================================================
+       MODAL
+    ========================================================= */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+
+      display: grid;
+      place-items: center;
+
+      padding: 20px;
+
+      background: rgba(11, 22, 53, 0.55);
+
+      backdrop-filter: blur(8px);
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+
+      z-index: 100;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      width: min(440px, 100%);
+
+      padding: 30px;
+
+      border-radius: 25px;
+
+      background: white;
+
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+
+      transform: translateY(15px) scale(0.97);
+
+      transition: transform 0.25s ease;
+    }
+
+    .modal-overlay.active .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-icon {
+      width: 60px;
+      height: 60px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 17px;
+
+      background: var(--blue-light);
+      color: var(--blue);
+
+      font-size: 25px;
+
+      margin-bottom: 20px;
+    }
+
+    .modal h3 {
+      color: var(--navy);
+
+      font-size: 23px;
+      letter-spacing: -0.025em;
+    }
+
+    .modal p {
+      margin-top: 9px;
+
+      color: var(--muted);
+
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+
+      margin-top: 25px;
+    }
+
+    .modal-button {
+      flex: 1;
+
+      padding: 12px 15px;
+
+      border-radius: 12px;
+
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .modal-cancel {
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .modal-continue {
+      background: var(--navy);
+      color: white;
+    }
+
+    .modal-continue:hover {
+      background: #172653;
+    }
+
+    /* =========================================================
+       TOAST
+    ========================================================= */
+    .toast {
+      position: fixed;
+
+      left: 50%;
+      bottom: 25px;
+
+      transform: translate(-50%, 20px);
+
+      padding: 12px 18px;
+
+      border-radius: 12px;
+
+      background: var(--navy);
+      color: white;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      box-shadow: var(--shadow-lg);
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s ease;
+
+      z-index: 200;
+    }
+
+    .toast.show {
+      opacity: 1;
+      visibility: visible;
+
+      transform: translate(-50%, 0);
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+    @media (max-width: 760px) {
+      header {
+        padding: 17px 20px;
+      }
+
+      .header-badge {
+        display: none;
+      }
+
+      .hero {
+        margin-top: 42px;
+        margin-bottom: 35px;
+      }
+
+      .hero h1 {
+        font-size: clamp(38px, 12vw, 54px);
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .scanner-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .scanner-card {
+        min-height: 270px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .brand-text span {
+        display: none;
+      }
+
+      .brand-logo {
+        width: 40px;
+        height: 40px;
+      }
+
+      .scanner-section {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .scanner-card {
+        padding: 24px;
+      }
+
+      .scanner-card h2 {
+        font-size: 21px;
+      }
+
+      .info-bar {
+        padding: 0 16px;
+      }
+    }
+
+    /* =========================================================
+       REDUCED MOTION
+    ========================================================= */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background -->
+  <div class="background-decoration" aria-hidden="true">
+    <div class="blob blob-one"></div>
+    <div class="blob blob-two"></div>
+    <div class="blob blob-three"></div>
+  </div>
+
+  <!-- =======================================================
+       HEADER
+  ======================================================== -->
+  <header>
+    <nav class="navbar" aria-label="Main navigation">
+
+      <a href="#" class="brand" aria-label="Scanner Hub home">
+        <div class="brand-logo">
+          ◈
+        </div>
+
+        <div class="brand-text">
+          <strong>Scanner Hub</strong>
+          <span>Digital Services Portal</span>
+        </div>
+      </a>
+
+      <div class="header-badge">
+        <span class="status-dot"></span>
+        System Online
+      </div>
+
+    </nav>
+  </header>
+
+
+  <!-- =======================================================
+       HERO
+  ======================================================== -->
+  <main>
+
+    <section class="hero">
+
+      <div class="eyebrow">
+        <span class="eyebrow-icon">✦</span>
+        Digital Services Portal
+      </div>
+
+      <h1>
+        Choose your
+        <span class="gradient-text">scanner.</span>
+      </h1>
+
+      <p class="hero-description">
+        Select the scanner that matches your activity.
+        Everything you need is just one click away.
+      </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         SCANNER OPTIONS
+    ====================================================== -->
+    <section class="scanner-section" aria-labelledby="scanner-heading">
+
+      <h2 id="scanner-heading" style="position:absolute; width:1px; height:1px; overflow:hidden;">
+        Available scanners
+      </h2>
+
+      <div class="scanner-grid">
+
+        <!-- Visitor Scanner -->
+        <article
+          class="scanner-card card-blue"
+          data-scanner="Visitor Scanner"
+          data-icon="⌁"
+          data-url="visitor-scanner.html"
+        >
+
+          <div class="card-top">
+            <div class="scanner-icon" aria-hidden="true">
+              ⌁
+            </div>
+
+            <span class="card-number">
+              01
+            </span>
+          </div>
+
+          <h2>
+            Visitor Scanner
+          </h2>
+
+          <p>
+            Quickly register and manage campus visitors
+            with a simple and efficient scanning process.
+          </p>
+
+          <div class="card-action">
+
+           <button
+  type="button"
+  class="open-button"
+  onclick="window.location.href='visitor-scanner.html'">
+  Open Scanner
+  <span class="arrow">→</span>
+</button>
+
+
+            <span class="card-label">
+              Visitor Services
+            </span>
+
+          </div>
+
+        </article>
+
+
+        <!-- Digital Friday -->
+        <article
+          class="scanner-card card-purple"
+          data-scanner="Digital Friday Scanner"
+          data-icon="◉"
+          data-url="/digital-friday"
+        >
+
+          <div class="card-top">
+
+            <div class="scanner-icon" aria-hidden="true">
+              ◉
+            </div>
+
+            <span class="card-number">
+              02
+            </span>
+
+          </div>
+
+          <h2>
+            Digital Friday Scanner
+          </h2>
+
+          <p>
+            Scan and record participation in Digital Friday
+            activities and school programs.
+          </p>
+
+          <div class="card-action">
+
+            <button
+  type="button"
+  class="open-button"
+  onclick="window.location.href='employee-client-scanner.html'">
+  Open Scanner
+  <span class="arrow">→</span>
+</button>
+
+
+            <span class="card-label">
+              Digital Friday
+            </span>
+
+          </div>
+
+        </article>
+
+
+        <!-- Smart Classroom -->
+        <article
+          class="scanner-card card-green"
+          data-scanner="Students NextGen Smart Classroom Scanner"
+          data-icon="▣"
+          data-url="/smart-classroom"
+        >
+
+          <div class="card-top">
+
+            <div class="scanner-icon" aria-hidden="true">
+              ▣
+            </div>
+
+            <span class="card-number">
+              03
+            </span>
+
+          </div>
+
+          <h2>
+            Students NextGen
+            Smart Classroom Scanner
+          </h2>
+
+          <p>
+            Access smart classroom scanning for student
+            attendance, activities, and digital learning services.
+          </p>
+
+          <div class="card-action">
+
+           <button
+  type="button"
+  class="open-button"
+  onclick="window.location.href='Nextgenstudent.html'">
+  Open Scanner
+  <span class="arrow">→</span>
+</button>
+
+
+            <span class="card-label">
+              NextGen Smart Classroom
+            </span>
+
+          </div>
+
+        </article>
+
+
+        <!-- Student Mobile ICT -->
+        <article
+          class="scanner-card card-orange"
+          data-scanner="Student Mobile ICT Scanner"
+          data-icon="▤"
+          data-url="/student-mobile-ict"
+        >
+
+          <div class="card-top">
+
+            <div class="scanner-icon" aria-hidden="true">
+              ▤
+            </div>
+
+            <span class="card-number">
+              04
+            </span>
+
+          </div>
+
+          <h2>
+            Student Mobile ICT Scanner
+          </h2>
+
+          <p>
+            Scan for student mobile ICT services, activities,
+            and technology-related programs.
+          </p>
+
+          <div class="card-action">
+
+           <button
+  type="button"
+  class="open-button"
+  onclick="window.location.href='mobile-icthub.html'">
+  Open Scanner
+  <span class="arrow">→</span>
+</button>
+
+
+            <span class="card-label">
+              Student ICT
+            </span>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         INFO BAR
+    ====================================================== -->
+    <section class="info-bar">
+
+      <div class="info-inner">
+        <span>💡</span>
+        <span>
+          <strong>Not sure which scanner to use?</strong>
+          Choose the service that matches your current activity.
+        </span>
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+  <footer>
+
+    <div class="footer-inner">
+
+      <div class="footer-copy">
+        © <span id="year"></span> Scanner Hub. All rights reserved.
+      </div>
+
+      <div class="footer-links">
+        <button type="button" id="helpButton">
+          Help
+        </button>
+
+        <button type="button" id="aboutButton">
+          About
+        </button>
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =======================================================
+       CONFIRMATION MODAL
+  ======================================================== -->
+  <div
+    class="modal-overlay"
+    id="modalOverlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+    aria-describedby="modalDescription"
+  >
+
+    <div class="modal">
+
+      <div class="modal-icon" id="modalIcon">
+        ⌁
+      </div>
+
+      <h3 id="modalTitle">
+        Open Scanner
+      </h3>
+
+      <p id="modalDescription">
+        You are about to open this scanner.
+      </p>
+
+      <div class="modal-actions">
+
+        <button
+          class="modal-button modal-cancel"
+          id="cancelButton"
+          type="button"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="modal-button modal-continue"
+          id="continueButton"
+          type="button"
+        >
+          Continue →
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Toast -->
+  <div
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
+  <script>
+    // ========================================================
+    // Configuration
+    // ========================================================
+
+    const scannerCards = document.querySelectorAll(".scanner-card");
+
+    const modalOverlay = document.getElementById("modalOverlay");
+    const modalIcon = document.getElementById("modalIcon");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDescription = document.getElementById("modalDescription");
+
+    const cancelButton = document.getElementById("cancelButton");
+    const continueButton = document.getElementById("continueButton");
+
+    const helpButton = document.getElementById("helpButton");
+    const aboutButton = document.getElementById("aboutButton");
+
+    const toast = document.getElementById("toast");
+
+    const yearElement = document.getElementById("year");
+
+    let selectedScanner = null;
+
+
+    // ========================================================
+    // Current year
+    // ========================================================
+
+    yearElement.textContent = new Date().getFullYear();
+
+
+    // ========================================================
+    // Open scanner modal
+    // ========================================================
+
+    function openScannerModal(card) {
+
+      const scannerName = card.dataset.scanner;
+      const icon = card.dataset.icon;
+      const url = card.dataset.url;
+
+      selectedScanner = {
+        name: scannerName,
+        icon: icon,
+        url: url
+      };
+
+      modalIcon.textContent = icon;
+
+      modalTitle.textContent = scannerName;
+
+      modalDescription.textContent =
+        `You are about to open the ${scannerName}. Continue to proceed.`;
+
+      modalOverlay.classList.add("active");
+
+      document.body.style.overflow = "hidden";
+
+      setTimeout(() => {
+        cancelButton.focus();
+      }, 50);
+    }
+
+
+    // ========================================================
+    // Close modal
+    // ========================================================
+
+    function closeModal() {
+
+      modalOverlay.classList.remove("active");
+
+      document.body.style.overflow = "";
+
+      selectedScanner = null;
+    }
+
+
+    // ========================================================
+    // Scanner card buttons
+    // ========================================================
+
+    scannerCards.forEach((card) => {
+
+      const button = card.querySelector(".open-button");
+
+      button.addEventListener("click", () => {
+        openScannerModal(card);
+      });
+
+    });
+
+
+    // ========================================================
+    // Continue
+    // ========================================================
+
+    continueButton.addEventListener("click", () => {
+
+      if (!selectedScanner) {
+        return;
+      }
+
+      /*
+        IMPORTANT:
+
+        The data-url values above are placeholders.
+
+        Example:
+
+        data-url="/visitor-scanner"
+
+        If your actual scanner pages are:
+
+        https://example.com/visitor
+        https://example.com/digital-friday
+        etc.
+
+        simply change the data-url value in each card.
+
+        For now, the code will navigate to the configured URL.
+      */
+
+      const destination = selectedScanner.url;
+
+      closeModal();
+
+      showToast(`Opening ${selectedScanner.name}...`);
+
+      setTimeout(() => {
+        window.location.href = destination;
+      }, 500);
+
+    });
+
+
+    // ========================================================
+    // Cancel
+    // ========================================================
+
+    cancelButton.addEventListener("click", closeModal);
+
+
+    // ========================================================
+    // Click outside modal
+    // ========================================================
+
+    modalOverlay.addEventListener("click", (event) => {
+
+      if (event.target === modalOverlay) {
+        closeModal();
+      }
+
+    });
+
+
+    // ========================================================
+    // ESC key
+    // ========================================================
+
+    document.addEventListener("keydown", (event) => {
+
+      if (event.key === "Escape") {
+
+        if (modalOverlay.classList.contains("active")) {
+          closeModal();
+        }
+
+      }
+
+    });
+
+
+    // ========================================================
+    // Help
+    // ========================================================
+
+    helpButton.addEventListener("click", () => {
+
+      showToast(
+        "Select the scanner that matches your activity."
+      );
+
+    });
+
+
+    // ========================================================
+    // About
+    // ========================================================
+
+    aboutButton.addEventListener("click", () => {
+
+      showToast(
+        "Scanner Hub — Digital Services Portal"
+      );
+
+    });
+
+
+    // ========================================================
+    // Toast notification
+    // ========================================================
+
+    let toastTimeout;
+
+    function showToast(message) {
+
+      clearTimeout(toastTimeout);
+
+      toast.textContent = message;
+
+      toast.classList.add("show");
+
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2500);
+
+    }
+  </script>
+
+</body>
+</html>
