@@ -798,7 +798,10 @@ function displayAttendanceRecords(records) {
         document.getElementById("emptyDashboard");
 
 
-    if (!tableBody) return;
+    if (!tableBody) {
+        console.error("Attendance table body not found.");
+        return;
+    }
 
 
     tableBody.innerHTML = "";
@@ -810,14 +813,17 @@ function displayAttendanceRecords(records) {
 
     if (records.length === 0) {
 
-        emptyDashboard.style.display = "block";
+        if (emptyDashboard) {
+            emptyDashboard.style.display = "block";
+        }
 
         return;
-
     }
 
 
-    emptyDashboard.style.display = "none";
+    if (emptyDashboard) {
+        emptyDashboard.style.display = "none";
+    }
 
 
     // ==========================================
@@ -834,59 +840,53 @@ function displayAttendanceRecords(records) {
             document.createElement("tr");
 
 
+        const pretest =
+            record.pretest !== undefined &&
+            record.pretest !== ""
+                ? record.pretest
+                : "-";
+
+
+        const posttest =
+            record.posttest !== undefined &&
+            record.posttest !== ""
+                ? record.posttest
+                : "-";
+
+
+        const dateTime =
+            record.displayDateTime ||
+            formatDateTime(record.dateTime);
+
+
         row.innerHTML = `
 
             <td>
                 ${records.length - index}
             </td>
 
-
             <td>
-                ${escapeHTML(
-                    record.name || "-"
-                )}
+                ${escapeHTML(record.name || "-")}
             </td>
 
-
             <td>
-                ${escapeHTML(
-                    record.office || "-"
-                )}
+                ${escapeHTML(record.office || "-")}
             </td>
 
-
             <td>
-                ${escapeHTML(
-                    record.position || "-"
-                )}
+                ${escapeHTML(record.position || "-")}
             </td>
 
-
             <td>
-                ${escapeHTML(
-                    record.pretest !== undefined &&
-                    record.pretest !== ""
-                        ? String(record.pretest)
-                        : "-"
-                )}
+                ${escapeHTML(String(pretest))}
             </td>
 
-
             <td>
-                ${escapeHTML(
-                    record.posttest !== undefined &&
-                    record.posttest !== ""
-                        ? String(record.posttest)
-                        : "-"
-                )}
+                ${escapeHTML(String(posttest))}
             </td>
 
-
             <td>
-                ${escapeHTML(
-                    record.displayDateTime ||
-                    formatDateTime(record.dateTime)
-                )}
+                ${escapeHTML(dateTime)}
             </td>
 
         `;
@@ -895,5 +895,10 @@ function displayAttendanceRecords(records) {
         tableBody.appendChild(row);
 
     });
+    document.addEventListener("DOMContentLoaded", function () {
+
+    loadDashboard();
+
+});
 
 }
