@@ -306,6 +306,10 @@ async function startScanner() {
 // QR SUCCESS
 // ==========================================
 
+// ==========================================
+// QR SUCCESS
+// ==========================================
+
 function onScanSuccess(decodedText) {
 
     console.log(
@@ -316,9 +320,7 @@ function onScanSuccess(decodedText) {
 
     // Prevent duplicate scan
     if (scannedData !== null) {
-
         return;
-
     }
 
 
@@ -352,6 +354,7 @@ function onScanSuccess(decodedText) {
         }
 
 
+        // Save scanned data
         scannedData = data;
 
 
@@ -386,6 +389,36 @@ function onScanSuccess(decodedText) {
 
 
         // ==========================================
+        // DISPLAY PRE-TEST
+        // ==========================================
+
+        const resultPretest =
+            document.getElementById("resultPretest");
+
+        if (resultPretest) {
+
+            resultPretest.textContent =
+                data.pretest || "-";
+
+        }
+
+
+        // ==========================================
+        // DISPLAY POST-TEST
+        // ==========================================
+
+        const resultPosttest =
+            document.getElementById("resultPosttest");
+
+        if (resultPosttest) {
+
+            resultPosttest.textContent =
+                data.posttest || "-";
+
+        }
+
+
+        // ==========================================
         // DISPLAY DATE
         // ==========================================
 
@@ -412,7 +445,10 @@ function onScanSuccess(decodedText) {
             "block";
 
 
-        // Stop camera
+        // ==========================================
+        // STOP CAMERA
+        // ==========================================
+
         stopScanner();
 
 
@@ -528,68 +564,156 @@ async function stopScanner() {
 // RECORD ATTENDANCE
 // ==========================================
 
+// ==========================================
+// RECORD ATTENDANCE
+// ==========================================
+
 function recordScannedAttendance() {
 
     if (!scannedData) {
-        alert("Please scan a QR code first.");
+
+        alert(
+            "Please scan a QR code first."
+        );
+
         return;
     }
 
+
     const now = new Date();
 
+
     const record = {
-        name: scannedData.name || "",
-        office: scannedData.office || "",
-        position: scannedData.position || "",
-        dateTime: now.toISOString(),
-        displayDateTime: now.toLocaleString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-            hour12: true
-        })
+
+        name:
+            scannedData.name || "",
+
+        office:
+            scannedData.office || "",
+
+        position:
+            scannedData.position || "",
+
+        pretest:
+            scannedData.pretest || "",
+
+        posttest:
+            scannedData.posttest || "",
+
+        dateTime:
+            now.toISOString(),
+
+        displayDateTime:
+            now.toLocaleString("en-US", {
+
+                year: "numeric",
+
+                month: "long",
+
+                day: "numeric",
+
+                hour: "2-digit",
+
+                minute: "2-digit",
+
+                second: "2-digit",
+
+                hour12: true
+
+            })
+
     };
+
+
+    // ==========================================
+    // LOAD EXISTING RECORDS
+    // ==========================================
 
     let records = [];
 
+
     try {
-        const savedRecords = localStorage.getItem("attendanceRecords");
+
+        const savedRecords =
+            localStorage.getItem(
+                "attendanceRecords"
+            );
+
 
         if (savedRecords) {
-            records = JSON.parse(savedRecords);
+
+            records =
+                JSON.parse(savedRecords);
+
         }
+
 
         if (!Array.isArray(records)) {
+
             records = [];
+
         }
 
+
     } catch (error) {
-        console.error("Error loading attendance records:", error);
+
+        console.error(
+            "Error loading attendance records:",
+            error
+        );
+
         records = [];
+
     }
 
-    // Add new attendance record
+
+    // ==========================================
+    // ADD NEW ATTENDANCE RECORD
+    // ==========================================
+
     records.push(record);
 
-    // Save to browser storage
+
+    // ==========================================
+    // SAVE TO BROWSER STORAGE
+    // ==========================================
+
     localStorage.setItem(
         "attendanceRecords",
         JSON.stringify(records)
     );
 
-    alert("Attendance recorded successfully!");
 
-    // Reset scanned result
+    alert(
+        "Attendance recorded successfully!"
+    );
+
+
+    // ==========================================
+    // RESET SCANNED RESULT
+    // ==========================================
+
     scannedData = null;
 
-    document.getElementById("scanResult").style.display = "none";
-    document.getElementById("noScanResult").style.display = "block";
 
-    // Update dashboard immediately
+    document.getElementById(
+        "scanResult"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "noScanResult"
+    ).style.display =
+        "block";
+
+
+    // ==========================================
+    // UPDATE DASHBOARD
+    // ==========================================
+
     loadDashboard();
+
 }
 function loadDashboard() {
 
