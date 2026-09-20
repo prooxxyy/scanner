@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Smart Classroom - QR Scanner</title>
+
+
+    <!-- GOOGLE FONTS -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="employee-client-scanner.css"
+    >
+
+
+    <!-- QR SCANNER LIBRARY -->
+
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         HEADER
+    =========================================== -->
+
+    <header class="top-navigation">
+
+        <div class="logo-area">
+
+            <div class="logo-icon">
+                ✓
+            </div>
+
+            <div class="logo-text">
+
+                <h2>
+                    Smart Classroom
+                </h2>
+
+                <span>
+                    Attendance System
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ==========================================
+         MAIN
+    =========================================== -->
+
+    <main class="page-container">
+
+
+        <!-- PAGE HEADING -->
+
+        <section class="page-heading">
+
+            <span>
+                TEACHER ACCESS
+            </span>
+
+            <h1>
+                QR Code Scanner
+            </h1>
+
+        </section>
+
+
+
+        <!-- ==========================================
+             SCANNER LAYOUT
+        =========================================== -->
+
+        <section class="scanner-layout">
+
+
+            <!-- ======================================
+                 CAMERA CARD
+            ======================================= -->
+
+            <div class="scanner-card">
+
+                <div class="card-title">
+
+                    <div class="title-icon scanner-icon">
+                        ◉
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Scan QR Code
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CAMERA -->
+
+                <div
+                    id="reader"
+                    class="reader"
+                ></div>
+
+
+                <!-- START BUTTON -->
+
+                <button
+                    id="startScannerButton"
+                    class="scanner-button"
+                    type="button"
+                >
+                    ◉ Start Scanner
+                </button>
+
+
+                <!-- STOP BUTTON -->
+
+                <button
+                    id="stopScannerButton"
+                    class="stop-scanner-button"
+                    type="button"
+                >
+                    ■ Stop Scanner
+                </button>
+
+            </div>
+
+
+
+            <!-- ======================================
+                 RESULT CARD
+            ======================================= -->
+
+            <div class="scanner-result-card">
+
+
+                <!-- RESULT HEADER -->
+
+                <div class="result-header">
+
+                    <div>
+
+                        <span class="small-title">
+                            SCANNED INFORMATION
+                        </span>
+
+                        <h2>
+                            Attendance Details
+                        </h2>
+
+                    </div>
+
+                    <div class="result-icon">
+                        ✓
+                    </div>
+
+                </div>
+
+
+
+                <!-- WAITING -->
+
+                <div
+                    id="noScanResult"
+                    class="no-scan-result"
+                >
+
+                    <div class="no-result-icon">
+                        ▣
+                    </div>
+
+                    <h3>
+                        Waiting for Scan
+                    </h3>
+
+                </div>
+
+
+
+                <!-- SCANNED RESULT -->
+
+                <div
+                    id="scanResult"
+                    class="scan-result"
+                >
+
+
+                    <!-- NAME -->
+
+                    <div class="person-name">
+
+                        <span>
+                            FULL NAME
+                        </span>
+
+                        <strong id="resultName">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <!-- DETAILS -->
+
+                    <div class="result-details">
+
+                        <div class="detail-box">
+
+                            <span>
+                                Office
+                            </span>
+
+                            <strong id="resultOffice">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span>
+                                Position
+                            </span>
+
+                            <strong id="resultPosition">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-box full">
+
+                            <span>
+                                Date & Time
+                            </span>
+
+                            <strong id="resultDate">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- VERIFIED -->
+
+                    <div class="attendance-success">
+
+                        <span>
+                            ✓
+                        </span>
+
+                        Attendance QR Verified
+
+                    </div>
+
+
+                    <!-- RECORD -->
+
+                    <button
+                        id="recordAttendanceButton"
+                        type="button"
+                        class="record-button"
+                    >
+                        ✓ Record Attendance
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+<section class="dashboard-section">
+    <div class="dashboard-title">
+        <div>
+            <p class="section-label">TEACHER ACCESS</p>
+            <h2>Attendance Dashboard</h2>
+        </div>
+
+        <button id="refreshDashboardButton" class="refresh-button" type="button">
+            ↻ Refresh
+        </button>
+    </div>
+
+    <div class="dashboard-stats">
+
+        <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div>
+                <span>Total Attendance</span>
+                <strong id="totalAttendance">0</strong>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">📅</div>
+            <div>
+                <span>Today's Attendance</span>
+                <strong id="todayAttendance">0</strong>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">✓</div>
+            <div>
+                <span>Last Scan</span>
+                <strong id="lastScan">None</strong>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="dashboard-card">
+
+        <div class="dashboard-card-header">
+            <div>
+                <p class="section-label">ATTENDANCE RECORDS</p>
+                <h3>Scanned Students</h3>
+            </div>
+
+            <button id="clearDashboardButton" class="clear-button" type="button">
+                Clear Records
+            </button>
+        </div>
+
+        <div class="table-container">
+            <table class="attendance-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Office</th>
+                        <th>Position</th>
+                        <th>Date & Time</th>
+                    </tr>
+                </thead>
+
+                <tbody id="attendanceTableBody">
+                </tbody>
+            </table>
+        </div>
+
+        <div id="emptyDashboard" class="empty-dashboard">
+            No attendance records yet.
+        </div>
+
+    </div>
+</section>
+    </main>
+
+
+
+    <!-- ==========================================
+         JAVASCRIPTS
+    =========================================== -->
+
+    <script src="employee-client-scanner-script.js"></script>
+
+</body>
+
+</html>
